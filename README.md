@@ -33,3 +33,13 @@ localhost is ususally http://127.0.0.1:8000/
 * Admin Panel - modifies database easily, elaborated below
 
 # Admin Panel
+1. To visit the admin page, go to http://127.0.0.1:8000/admin, here you will need to enter the username and passwords
+2. username: 'admin', passwords: 'admin'
+3. You can always create more admins by using the below code
+```
+python base\manage.py createsuperuser
+```
+4. you can choose Owner or Property to visit/modify the data. Please play around with it to try out the filter/search functionailty 
+
+### If you have any questions, please ask me via my email. Thanks!
+### Jiaming(Alex) Yang
