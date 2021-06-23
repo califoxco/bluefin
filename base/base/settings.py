@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',                                 # core app that manages the site
     'django_filters',                       # django_filters manages labeling and sorting
     'django.contrib.humanize',              # helps with numbers in templates, eg. 1000 -> 1,000
+    'crispy_forms',                         # better-looking forms
 
 ]
 

@@ -1,3 +1,6 @@
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Property
@@ -11,13 +14,36 @@ from .filters import PropertyFilter
 #     context = {'properties': properties, 'home_filter': home_filter}
 #     return render(request, 'home.html', context)
 
+def homeJson(request, slug):
+    response = ''
+    property_qs = Property.objects.filter(slug=slug)
+    if property_qs.exists():
+        property = property_qs[0]
+        serialized_date = property.listed_date.strftime("%Y-%m-%d %H:%M:%S")
+        serialized_picture_url = request.get_host()+property.item_picture.url
+        response = json.dumps([{ 'address1' : property.address_1,
+                                 'address2': property.address_2,
+                                 'listedDate': serialized_date,
+                                 'city': property.city,
+                                 'state': property.state,
+                                 'zipCode': property.zip,
+                                 'propertyType': property.property_type,
+                                 'squareFeet': property.square_feet,
+                                 'bedroomCount': property.number_bedroom,
+                                 'bathroomCount': property.number_baths,
+                                 'description': property.description,
+                                 'status': property.transaction_state,
+                                 'price': property.price,
+                                 'primaryImageUrl': serialized_picture_url
+                                 }])
+    return HttpResponse(response, content_type='text/json')
+
 
 class HomeDetailView(DetailView):
     model = Property
     template_name = "property_detail.html"
 
 
-# Could alternatively use ListView for better code optimization
 class HomeView(ListView):
     model = Property
     template_name = "home.html"
