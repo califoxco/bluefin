@@ -1,7 +1,7 @@
-import uuid
-from django.conf import settings
+from django.shortcuts import reverse
 from django.db import models
 from django.utils.text import slugify
+
 
 class Owner(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
@@ -15,7 +15,7 @@ class Owner(models.Model):
     #                          on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.id}, name: {self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Property(models.Model):
@@ -56,9 +56,16 @@ class Property(models.Model):
     # -----------------database foreign key----------------------
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
 
+    # creating an unique slug for each property
     def save(self, *args, **kwargs):
         self.slug = slugify(self.address_1 + '-' + self.address_2 + '-' + self.zip)
         super().save(*args, **kwargs)
 
+    # creating an url for detail view using slug
+    def get_absolute_url(self):
+        return reverse("core:home-detail", kwargs={
+            'slug': self.slug
+        })
+
     def __str__(self):
-        return str(self.id)
+        return str(self.id + '-' + self.address_1)

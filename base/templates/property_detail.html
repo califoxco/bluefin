@@ -1,27 +1,27 @@
 {% load static %}
 {% load humanize %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html style="font-size: 16px;">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Buy Homes at BLUEFIN">
+    <meta name="keywords" content="Post 1 Headline">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Home</title>
+    <title>{{ property.address_1 }}</title>
     <link rel="stylesheet" href="{% static 'nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'Inventory.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'Post-Template.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'jquery.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'nicepage.js' %}" defer=""></script>
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
-    <meta property="og:title" content="Inventory">
+    <meta property="og:title" content="Post Template">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#478ac9">
 </head>
-<body data-home-page="Inventory.html" data-home-page-title="Inventory" class="u-body">
+<body class="u-body">
 <header class="u-clearfix u-header u-header" id="sec-2a76">
     <div class="u-clearfix u-sheet u-sheet-1">
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -101,62 +101,28 @@
         <a href="#" class="u-btn u-button-style u-btn-2">Search</a>
     </div>
 </header>
-<section class="u-clearfix u-hidden-xs u-section-1" id="carousel_2769">
-    <div class="u-expanded-height u-palette-1-base u-shape u-shape-rectangle u-shape-1"></div>
-    <img class="u-expand-resize u-image u-image-1"
-         src="{% static 'images/city-landscape-real-estate-construction.jpg' %}" data-image-width="1300"
-         data-image-height="671">
-    <div class="u-clearfix u-gutter-50 u-layout-wrap u-layout-wrap-1">
-        <div class="u-layout">
-            <div class="u-layout-row">
-                <div class="u-size-60">
-                    <div class="u-layout-col">
-                        <div class="u-container-style u-layout-cell u-left-cell u-size-60 u-white u-layout-cell-1">
-                            <div class="u-container-layout u-valign-middle u-container-layout-1">
-                                <h1 class="u-text u-text-palette-1-base u-text-1">Buy Homes at BLUEFIN</h1>
-                                <p class="u-text u-text-2">BLUEFIN has a wide range of properties ranging from single
-                                    family homes to multifamilies and to industrial</p>
-                                <a href="#" class="u-btn u-button-style u-btn-1">read more</a>
-                            </div>
-                        </div>
-                    </div>
+<section class="u-align-center u-clearfix u-section-1" id="sec-5a7a">
+    <div class="u-clearfix u-sheet u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+        <div class="u-container-style u-expanded-width u-post-details u-post-details-1">
+            <div class="u-container-layout u-valign-middle u-container-layout-1"><!--blog_post_image-->
+                <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-1" src="{{property.item_picture.url}}">
+                <!--/blog_post_image--><!--blog_post_header-->
+                <h2 class="u-blog-control u-text u-text-1">{{ property.number_bedroom}} bd {{ property.number_baths}} ba {{ property.square_feet|intcomma}} sqft - {{ property.transaction_state}}</h2><!--/blog_post_header-->
+                <!--blog_post_metadata-->
+                <div class="u-blog-control u-metadata u-metadata-1"><!--blog_post_metadata_date-->
+                    <span class="u-meta-date u-meta-icon">This lovely <b>{{property.property_type}}</b> is located at <b>{{ property.address_1 }}, {{ property.city }}, {{ property.state }}</b></span><!--/blog_post_metadata_date-->
+                    <!--blog_post_metadata_category-->
+                    <!--/blog_post_metadata_category--><!--blog_post_metadata_comments-->
+                    <!--/blog_post_metadata_comments-->
+                </div><!--/blog_post_metadata--><!--blog_post_content-->
+                <div class="u-align-justify u-blog-control u-post-content u-text u-text-2 fr-view">
+                    {{property.description}}
+                </div>
+                <div class="u-align-justify u-blog-control u-post-content u-text u-text-2 fr-view">
+                    Would you like to contact its current owner, {{property.owner}}?
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-<section class="u-align-center u-clearfix u-section-2" >
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div class="u-form u-form-1">
-            <form method="get" class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form"
-                  style="padding: 15px">
-                {{home_filter.form}}
-                <div class="u-form-group u-form-submit u-form-group-3" style="padding-left: 5px">
-                    <button class="u-btn u-btn-submit u-button-style" type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
-<section class="u-clearfix u-section-3" id="sec-371f">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-expanded-width u-list u-list-1">
-            <div class="u-repeater u-repeater-1">
-                {% for property in object_list %}
-                <div class="u-container-style u-list-item u-repeater-item">
-                    <div class="u-container-layout u-similar-container u-container-layout-1">
-                        <a href="{{ property.get_absolute_url }}" ><img alt="{{ property.address_1 }}" class="u-expanded-width u-image u-image-default u-image-1" data-image-width="1600"
-                                data-image-height="724" src="{{ property.item_picture.url }}"></a>
-                        <h3 class="u-text u-text-1">${{ property.price|intcomma }}</h3>
-                        <div class="u-border-3 u-border-palette-1-base u-expanded-width u-line u-line-horizontal u-line-1"></div>
-                        <p class="u-text u-text-2">{{ property.number_bedroom}} bd {{ property.number_baths}} ba {{ property.square_feet|intcomma}} sqft - {{ property.transaction_state}}</p>
-                        <p class="u-text u-text-3">{{ property.address_1 }}, {{ property.city }}, {{ property.state }}
-                            {{ property.zip }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+        </div><!--/blog_post--><!--/post_details-->
     </div>
 </section>
 
@@ -167,5 +133,6 @@
         <p class="u-small-text u-text u-text-variant u-text-1">Backend built with Django.</p>
     </div>
 </footer>
+
 </body>
 </html>
