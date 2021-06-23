@@ -3,21 +3,31 @@ from django.db import models
 from django.utils.text import slugify
 
 
+# ------------------------------------ Owner Model ------------------------------------
+# Description: Stores Owner objects
+# Parameter: model
+# -------------------------------------------------------------------------------------
 class Owner(models.Model):
     first_name = models.CharField(max_length=100, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(unique=True)
-    phone = models.BigIntegerField(default=0)
+    phone = models.BigIntegerField(default=0)  # alternatively use string
     status = models.CharField(max_length=100, default="Active")
 
     # below is the option to link to user account, but for now lets not use a login system yet
     # user = models.ForeignKey(settings.AUTH_USER_MODEL,
     #                          on_delete=models.CASCADE)
 
+    # eg. jiaming yang
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
+# ------------------------------------ Property Model ------------------------------------
+# Description: Stores property objects
+# Parameter: model
+# ----------------------------------------------------------------------------------------
+# these are set choices. Note that key and value are the same because keys serve no purpose
 class Property(models.Model):
     PROPERTY_TYPE = (
         ("Single Family Home", "Single Family Home"),
@@ -37,7 +47,7 @@ class Property(models.Model):
     )
 
     # slug is used for generating url
-    slug = models.SlugField(default='0')
+    slug = models.SlugField(default='', editable=False)
     # -----------------basic info----------------------
     listed_date = models.DateTimeField(auto_now_add=True)
     address_1 = models.CharField(max_length=200)
@@ -67,5 +77,6 @@ class Property(models.Model):
             'slug': self.slug
         })
 
+    # eg.  1-1719 Eucalyptus Dr.
     def __str__(self):
-        return str(self.id + '-' + self.address_1)
+        return str(self.id) + '-' + self.address_1

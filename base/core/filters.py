@@ -1,10 +1,13 @@
 import django_filters
 from django_filters import CharFilter, RangeFilter
 from django.db.models import ImageField
+from .models import Property
 
-from .models import *
 
-
+# ------------------------------------ Filter ------------------------------------
+# Description: Custom django-filter for filtering homes
+# Parameter: django_filter
+# --------------------------------------------------------------------------------
 class PropertyFilter(django_filters.FilterSet):
     city = CharFilter(field_name='city', lookup_expr='icontains')
     price = RangeFilter()
