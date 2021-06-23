@@ -30,6 +30,7 @@ localhost is ususally http://127.0.0.1:8000/
 * Search Bar - type in the any address or keyword, click search
 * Filter Bar - type in price range, or number of bedrooms, or choose property type, click submit
 * Detail View - Click on home images to view detail
+* JSON API - In the detail view, you can click the "Get JSON" button to generate a JSON. ALternatively, you could access the API via /home-json/<unique_slug>/
 * Admin Panel - modifies database easily, elaborated below
 
 # Admin Panel
